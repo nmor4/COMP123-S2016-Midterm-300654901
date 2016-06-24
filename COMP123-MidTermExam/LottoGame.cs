@@ -17,48 +17,108 @@ namespace COMP123_MidTermExam
      */
     public abstract class LottoGame
     {
+       
+
+       
+
         // PRIVATE INSTANCE VARIABLES +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        
+
         // CREATE private fields here --------------------------------------------
-
+private List<int> _elementList;
+        private int _elementNumber;
+        private List<int> _numberList;
+        private Random _random;
+        private int _setSize;
         // PUBLIC PROPERTIES ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-        
+
         // CREATE public properties here -----------------------------------------
-
-        // CONSTRUCTORS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-        /**
-         * <summary>
-         * This constructor takes two parameters: elementNumber and setSize
-         * The elementNumber parameter has a default value of 6
-         * The setSize parameter has a default value of 49
-         * </summary>
-         * 
-         * @constructor LottoGame
-         * @param {int} elementNumber
-         * @param {int} setSize
-         */
-        public LottoGame(int elementNumber = 6, int setSize = 49)
+public List<int> ElementList
         {
-            // assign elementNumber local variable to the ElementNumber property
-            this.ElementNumber = elementNumber;
+            get
+            {
+                return this._elementList;
+            }
 
-            // assign setSize local variable tot he SetSize property
-            this.SetSize = setSize;
-
-            // call the _initialize method
-            this._initialize();
-
-            // call the _build method
-            this._build();
+            set
+            {
+            }
         }
 
+        public int ElementNumber
+        {
+            get
+            {
+                return this._elementNumber;
+            }
+
+            set
+            {
+                this._elementNumber = value;
+            }
+        }
+
+        public List<int> NumberList
+        {
+            get
+            {
+                return this._numberList;
+            }
+
+            set
+            {
+            }
+        }
+
+        public System.Random random
+        {
+            get
+            {
+                return this._random;
+            }
+
+            set
+            {
+            }
+        }
+
+        public int SetSize
+        {
+            get
+            {
+                return this._setSize;
+            }
+
+            set
+            {
+                this._setSize = value;
+            }
+        }
+        // CONSTRUCTORS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ public LottoGame(int ElementNumber = 6,int setSize = 49)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        
         // PRIVATE METHODS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         // CREATE the private _initialize method here -----------------------------
-
+ public void _initialize()
+        {
+            this.NumberList = new List<int>();
+            this.ElementList = new List<int>();
+            this.random = new Random();
+        }
         // CREATE the private _build method here -----------------------------------
-
+  public void _build()
+        {
+            for (int index = 0; index < SetSize; index++)
+            {
+                int number = index;
+                this.NumberList.Add(number);
+            }
+            
+        }
         // OVERRIDEN METHODS ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         /**
@@ -71,7 +131,10 @@ namespace COMP123_MidTermExam
          * @method ToString
          * @returns {string}
          */
-        public override string ToString()
+        
+
+        // PUBLIC METHODS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+public override string ToString()
         {
             // create a string variable named lottoNumberString and intialize it with the empty string
             string lottoNumberString = String.Empty;
@@ -86,8 +149,31 @@ namespace COMP123_MidTermExam
             return lottoNumberString;
         }
 
-        // PUBLIC METHODS +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+      
+ // CREATE the public PickElements method here ---------------------------
+     public void PickElements()
+        {for (int index = 0; index < ElementNumber; index++)
+            {
+                int number = random.Next(NumberList.Count);
+                ElementList.Add(NumberList[number]);
+                NumberList.Remove(number);
+            }
+                
+            if (this.ElementList.Count >0)
+            {
+                
+                this.ElementList.Clear();
+                this.NumberList.Clear();
+                _build();
+                ElementList.Sort();
 
-        // CREATE the public PickElements method here ----------------------------
+            
+             };
+               
+            
+        }
+        
     }
+
+        
 }
