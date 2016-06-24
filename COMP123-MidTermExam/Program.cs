@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/**
+ *  Nick Morin - 300654901
+ *  Last modified: 2016-06-24
+ *  Program creates two sets of random lotto numbers 
+ *  */
+ 
 namespace COMP123_MidTermExam
 {
     /**
